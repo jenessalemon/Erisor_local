@@ -7,11 +7,6 @@ library("seqinr")
 library("ggplot2")
 library("adegenet")
 
-#Fix the file
-import pandas as pd
-
-str_file = "/path/to/your/file.str"
-
 #Read in data
 obj1 <- read.structure("carol.str") #place cursor in console
 # It will prompt for info:

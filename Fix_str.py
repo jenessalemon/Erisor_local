@@ -1,15 +1,15 @@
 import pandas as pd
 
-str_file = "/Users/jimblotter/Desktop/Grad_School/Data_Analysis/QC/carol.str"
+str_file = "/Users/jimblotter/Desktop/Grad_School/Data_Analysis/QC/erisor.str"
 
 # Import the .str file into pandas.
-IN_STR = pd.read_csv(str_file, sep="\t", na_values='-9', header=None)
+IN_STR = pd.read_csv(str_file, sep="\t", header=None)
 
 # This file has extra columns with no info. I remove them: axis=1 to remove column, how='all' to remove columns where ALL rows are blank.
 INN_STR = IN_STR.dropna(axis= 1, how= 'all')
-INN_STR = IN_STR.dropna(axis= 0, how= 'all')
+#INN_STR = IN_STR.dropna(axis= 0, how= 'all')
 
-INN_STR.to_csv("/Users/jimblotter/Desktop/Grad_School/Data_Analysis/QC/paul.str", sep='\t',index= False,header= False)
+INN_STR.to_csv("/Users/jimblotter/Desktop/Grad_School/Data_Analysis/QC/eri_sor.str", sep='\t',index= False,header= False)
 
 
 

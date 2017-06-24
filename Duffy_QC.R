@@ -8,10 +8,10 @@ library("ggplot2")
 library("adegenet")
 
 #Read in data
-obj1 <- read.structure("carol.str") #place cursor in console
+obj1 <- read.structure("eri_sor.str") #place cursor in console
 # It will prompt for info:
-#   genotypes = 267? (number of samples) GOT THIS FROM BARCODES FILE
-#   markers = 22 (number of loci)
+#   genotypes = 246 (number of samples) GOT THIS FROM BARCODES FILE
+#   markers = 1886 (number of loci)
 #   column with labels for genotypes = 1 (the names of the samples)
 #   column with population factor = 0 (if we were specifying populations a priori but we aren't)
 #   other optional columns - just hit enter, there are none in our data

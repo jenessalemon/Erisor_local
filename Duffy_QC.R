@@ -8,16 +8,16 @@ library("ggplot2")
 library("adegenet")
 
 #Read in data
-obj1 <- read.structure("eri_sor.str") #place cursor in console
+obj1 <- read.structure("eri_sor_9sout.str") #place cursor in console
 # It will prompt for info:
-#   genotypes = 246 (number of samples) GOT THIS FROM BARCODES FILE
+#   genotypes = 246 244 because I threw out two (number of samples) GOT THIS FROM BARCODES FILE
 #   markers = 1886 (number of loci)
 #   column with labels for genotypes = 1 (the names of the samples)
 #   column with population factor = 0 (if we were specifying populations a priori but we aren't)
 #   other optional columns - just hit enter, there are none in our data
 #   row with the marker names = 0 (We don't have a marker names row)
-#   genotypes coded by a single row = Y (We have 2 lines per sample in the dataset? I THINK I JUST HAVE ONE)
-indNames(obj1) # should return a list of the 267 sample names DOESNT
+#   genotypes coded by a single row = n (We have 2 lines per sample in the dataset? I THINK I JUST HAVE ONE)
+indNames(obj1) # should return a list of the 245 sample names, I only get 229
 ploidy(obj1) # should return 2 since we gave it 2 alleles for each marker DOES
 
 #Neighbor joining euclidian distance tree

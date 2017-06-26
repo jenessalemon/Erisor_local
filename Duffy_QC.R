@@ -37,7 +37,11 @@ M <- as(D, "matrix")               #this maybe makes a normal matrix of the dist
 M                                  #there's a lot of 0s, but there are actually values appearing?
 
 #Indexing Distance Matrix (D)
-D
+  #pseudocode:
+  #for a certain individual (replicate):
+    # search leftwards and downwards
+    # find the 5 highest values
+    # report the 5 individuals (in order) that correspond to those values. 
 
 #Making a Tree
 tre <- njs(D)

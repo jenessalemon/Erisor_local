@@ -1,5 +1,5 @@
 setwd('/Users/jimblotter/Desktop/Grad_School/Data_Analysis/QC/') #remember to put the .str file there!
-install.packages("genetics")
+#install.packages("genetics")
 library("ape")
 library("genetics")        #there is no package called ‘genetics’ = install.packages("genetics")
 library("pegas")
@@ -8,7 +8,7 @@ library("ggplot2")
 library("adegenet")
 
 #Read in data
-obj1 <- read.structure("eri_sor_9sout.str") #place cursor in console
+obj1 <- read.structure("eri_sor_9sout.str", n.ind = 244, n.loc = 1886, col.lab = 1, col.pop = 0, col.others = NULL, row.marknames = 0) #place cursor in console
 # It will prompt for info:
 #   genotypes = 246 244 because I threw out two (number of samples) GOT THIS FROM BARCODES FILE
 #   markers = 1886 (number of loci)

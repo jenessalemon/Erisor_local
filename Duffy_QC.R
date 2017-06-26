@@ -25,9 +25,13 @@ D <- dist(tab(obj1))
 
 #What does the matrix look like?
 D
-dim(D)
-nrow(D)
-ncol(D)  #they all say NULL. Fascinating.
+dim(D)                             #NULL, Apparenty because this is a "dist" object.
+class(D)                           #dist
+attributes(D)
+D[1]                               #didnt get a 0 so that is good
+attributes(dist1)
+mat2 <- as(dist1, "matrix")
+mat2[1, 2] <- 0
 
 #Indexing Distance Matrix (D)
 D

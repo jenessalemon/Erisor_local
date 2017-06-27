@@ -70,6 +70,13 @@ find_reps <- function(row){
   relatives[2] <- decreasing_index2[1]
   decreasing_index2[1] = Inf
   decreasing_index3 <- order(decreasing_index2, decreasing = FALSE)
+  relatives[3] <- decreasing_index3[1]
+  decreasing_index2[1] = Inf
+  decreasing_index4 <- order(decreasing_index2, decreasing = FALSE)
+  relatives[4] <- decreasing_index4[1]
+  decreasing_index2[1] = Inf
+  decreasing_index5 <- order(decreasing_index2, decreasing = FALSE)
+  relatives[5] <- decreasing_index5[1]
   return(relatives)
 }
 find_reps(row1)

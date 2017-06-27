@@ -20,17 +20,22 @@ obj1 <- read.structure("eri_sor_9sout.str", n.ind = 244, n.loc = 1886, col.lab =
 indNames(obj1) # should return a list of the 245 sample names, I only get 229
 ploidy(obj1) # should return 2 since we gave it 2 alleles for each marker DOES
 
+names_list <- as.list(indNames(obj1))
+names_list[4]
+
+
 #Neighbor joining euclidian distance tree
 D <- dist(tab(obj1))
 
 #What does D look like?
-D
+D                                  #this is strange looking. Is it ok that there are NA and 0s? 0 means they are identical... and there are so many blank spaces...?
 dim(D)                             #NULL, Apparenty because this is a "dist" object.
 class(D)                           #dist
 attributes(D)
 str(D)
-D[1]                               #didnt get a 0 so that is good
-which(D==62.34581)                 #didn't work. integer(0)
+D[100]                               #didnt get a 0 so that is good
+D["p_019s_11"]
+D.labels
 
 attributes(dist1)
 M <- as(D, "matrix")               #this maybe makes a normal matrix of the distance values?
@@ -39,9 +44,30 @@ M                                  #there's a lot of 0s, but there are actually 
 #Indexing Distance Matrix (D)
   #pseudocode:
   #for a certain individual (replicate):
-    # search leftwards and downwards
-    # find the 5 highest values
-    # report the 5 individuals (in order) that correspond to those values. 
+    # for each row, find the lowest 3 nubmers, return the index for that item
+    # for the 2nd column, we need everything before the second item, and everything after.
+    # in order to find the 3 lowest, find the lowest, remove it, then find the lowest again, repeat
+
+row1 <- M["p_001s_01",]
+row1
+row1["p_001s_03"]
+str(row1)
+which.max(row1)
+row1[226]
+order(row1)
+decreasing_index <- order(row1, decreasing = FALSE)
+row1[1]
+which(row1 == min(row1))
+
+#for "p001-s_01" in 1 to 229 in row
+#index number = decreasing_index[i]
+#row1[index number] 
+#if NA, we stop
+#if first time through, save, its the lowest value!
+#as long as it is 0, add index number to the list
+#then we have a list that is second lowest
+
+#output will be a list of index numbers, then search names_list to get the sample name for that index
 
 #Making a Tree
 tre <- njs(D)

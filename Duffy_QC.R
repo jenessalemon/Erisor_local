@@ -64,8 +64,13 @@ row1[3]                             #by index number
 find_reps <- function(row){
   relatives <- list()                                         #initialize list of relatives
   decreasing_index <- order(row, decreasing = FALSE)          #sort the list with closest relatives first
-  closest <- decreasing_index[1]                              #first in the list is the closest relative
-  relatives[i] <- 
+  relatives[1] <- decreasing_index[1]                         #first in the list is the closest relative
+  decreasing_index[1] = Inf
+  decreasing_index2 <- order(decreasing_index, decreasing = FALSE)
+  relatives[2] <- decreasing_index2[1]
+  decreasing_index2[1] = Inf
+  decreasing_index3 <- order(decreasing_index2, decreasing = FALSE)
+  return(relatives)
 }
 find_reps(row1)
 
@@ -75,11 +80,20 @@ find_reps(row1)
 which.max(row1)
 order(row1)
 decreasing_index <- order(row1, decreasing = FALSE)
+decreasing_index[1]
+decreasing_index[1] <- Inf
+decreasing_index[1]
+decreasing_index2 <- order(decreasing_index, decreasing = FALSE)
+decreasing_index2[1] 
+
+
+
 decreasing_index[3]
 closest <- decreasing_index[3]
 which(row1 == min(row1))
 my_list = c(1,2,3)
 my_list[1] <- a
+my_list[2]
 for (i in decreasing_index){
   print(i)
 }

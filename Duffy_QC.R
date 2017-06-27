@@ -62,10 +62,10 @@ row1[3]                             #by index number
 
 #Start small, write the code for just row 1:
 find_reps <- function(row){
-  decreasing_index <- order(row, decreasing = FALSE)
-  for (i in decreasing_index){
-    print(i)
-    }
+  relatives <- list()                                         #initialize list of relatives
+  decreasing_index <- order(row, decreasing = FALSE)          #sort the list with closest relatives first
+  closest <- decreasing_index[1]                              #first in the list is the closest relative
+  relatives[i] <- 
 }
 find_reps(row1)
 
@@ -75,8 +75,14 @@ find_reps(row1)
 which.max(row1)
 order(row1)
 decreasing_index <- order(row1, decreasing = FALSE)
+decreasing_index[3]
+closest <- decreasing_index[3]
 which(row1 == min(row1))
-
+my_list = c(1,2,3)
+my_list[1] <- a
+for (i in decreasing_index){
+  print(i)
+}
 
 #Making a Tree
 tre <- njs(D)

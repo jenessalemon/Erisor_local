@@ -47,8 +47,6 @@ row1[3]                             #by index number
 
 #Function for identification of the 5 closest relatives to a sample.
   #What I need to do:
-    # for each row, find the lowest 3 nubmers, return the index for that item
-    # for the ith row, we need everything before the ith item, and everything after.
     # in order to find the 3 lowest, find the lowest, set it to an infinitely high value, then find the lowest again, repeat
   #pseudocode:
     #for "p001-s_01" in 1 to 229 in row
@@ -65,7 +63,7 @@ find_reps <- function(row){
   relatives <- list()                                         #initialize list of relatives
   decreasing_index <- order(row, decreasing = FALSE)          #sort the list with closest relatives first
   relatives[1] <- decreasing_index[1]                         #first in the list is the closest relative
-  decreasing_index[1] = Inf
+  decreasing_index[1] = Inf                                   #set to infinite and re sort
   decreasing_index2 <- order(decreasing_index, decreasing = FALSE)
   relatives[2] <- decreasing_index2[1]
   decreasing_index2[1] = Inf
@@ -81,19 +79,25 @@ find_reps <- function(row){
 }
 find_reps(row1)
 
+find_relatives <- function(row){                                #why is 
+  relatives <- list()
+  decreasing_index <- order(row, decreasing = FALSE)
+  for (i in 1:5){
+    relatives[i] <- decreasing_index[1]                                      #first in the list is the closest relative
+    decreasing_index[1] <- Inf                                               #set to infinite
+    decreasing_index <- order(decreasing_index, decreasing = FALSE)          #sort the list with closest relatives first
+  }
+  return(relatives)
+}
+find_relatives(row1)
+
 #Then I will need to sort each row in the matrix and call the function on my replicate samples.
 
 #Possibly helpful:
 which.max(row1)
 order(row1)
 decreasing_index <- order(row1, decreasing = FALSE)
-decreasing_index[1]
-decreasing_index[1] <- Inf
-decreasing_index[1]
-decreasing_index2 <- order(decreasing_index, decreasing = FALSE)
-decreasing_index2[1] 
-
-
+decreasing_index[229]
 
 decreasing_index[3]
 closest <- decreasing_index[3]

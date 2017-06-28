@@ -67,16 +67,19 @@ find_relatives <-function(row){
   }
   return(relatives)
 }
-relatives <- find_relatives(row1)
-
+output <- find_relatives(row1)
+output
 #Now I want the output of find_relatives to be converted into sample names, fount in names_list.
-index_to_samples <- function(relatives){
+index_to_samples <- function(find_relatives_output){
   samples <- list()
-  for(i in relatives){
+  for(i in find_relatives_output){
+    #print(i)
     print(names_list[i])
+    #samples <- names_list[i]
   }
+  #return(samples)
 }
-index_to_samples(relatives)
+index_to_samples(output)
 
 
 

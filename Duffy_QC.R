@@ -59,19 +59,6 @@ row1[3]                             #by index number
     #output will be a list of index numbers, then search names_list to get the sample name for that index
 
 #Start small, write the code for just row 1:
-"find_rels <- function(row){                                                  #doesn't work                         
-  relatives <- list()
-  decreasing_index <- order(row, decreasing = FALSE)
-  for (i in 1:5){
-    relatives[i] <- decreasing_index[1]                                      #first in the list is the closest relative
-    decreasing_index[1] <- Inf                                               #set to infinite
-    decreasing_index <- order(decreasing_index, decreasing = FALSE)          #sort the list with closest relatives first
-    print(decreasing_index[1])
-  }
-  return(relatives)
-}
-find_rels(row1)"
-
 find_relatives <-function(row){
   relatives <- list()                                                        #initialize an empty list
   decreasing_index <- order(row, decreasing = FALSE)                         #sort, smallest distance values first
@@ -80,34 +67,27 @@ find_relatives <-function(row){
   }
   return(relatives)
 }
-find_relatives(row1)
+relatives <- find_relatives(row1)
 
-names_list
+#Now I want the output of find_relatives to be converted into sample names, fount in names_list.
+index_to_samples <- function(relatives){
+  samples <- list()
+  for(i in relatives){
+    print(names_list[i])
+  }
+}
+index_to_samples(relatives)
 
-#Then I will need to sort each row in the matrix and call the function on my replicate samples.
+
 
 #Possibly helpful:
 which.max(row1)
 order(row1)
 decreasing_index <- order(row1, decreasing = FALSE)
 decreasing_index[229]
-
-decreasing_index[3]
-closest <- decreasing_index[3]
 which(row1 == min(row1))
 my_list = c(1,2,3)
-my_list[1] <- a
 my_list[2]
-
-relatives <- list()                                         #initialize list of relatives
-decreasing_index <- order(row1, decreasing = FALSE)          #sort the list with closest relatives first
-relatives[1] <- decreasing_index[1]                         #first in the list is the closest relative
-decreasing_index[1] = Inf                                   #set to infinite and re sort
-print(decreasing_index)
-decreasing_index2 <- order(decreasing_index, decreasing = FALSE)
-print(decreasing_index2) #wth???
-
-
 
 #Making a Tree
 tre <- njs(D)

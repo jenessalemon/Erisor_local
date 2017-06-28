@@ -45,31 +45,23 @@ str(row1)
 row1["p_001s_03"]                   #index by sample name
 row1[3]                             #by index number
 
-#Function for identification of the 5 closest relatives to a sample.
-  #What I need to do:
-    # in order to find the 3 lowest, find the lowest, set it to an infinitely high value, then find the lowest again, repeat
-  #pseudocode:
-    #for "p001-s_01" in 1 to 229 in row
-    #index number = decreasing_index[i]
-    #row1[index number] 
-    #if NA, we stop
-    #if first time through, save, its the lowest value!
-    #as long as it is 0, add index number to the list
-    #then we have a list that is second lowest
-    #output will be a list of index numbers, then search names_list to get the sample name for that index
+#Now we identify the 5 closest relatives to a replicate sample:
 
-#Start small, write the code for just row 1:
+#Find 5 closest relatives for just one sample (one row of the matrix):
 find_relatives <-function(row){
-  relatives <- list()                                                        #initialize an empty list
-  decreasing_index <- order(row, decreasing = FALSE)                         #sort, smallest distance values first
+  relatives <- list()                                    #initialize an empty list
+  decreasing_index <- order(row, decreasing = FALSE)     #sort, smallest distance values first
   for (i in 1:5){
-    relatives[i] <- decreasing_index[i]                                      #first item in the list is the closest relative
+    relatives[i] <- decreasing_index[i]                  #first item in the list is the closest relative
   }
   return(relatives)
 }
+#call the function with one row of the matrix (one individual).
+row1 <- M["p_002.5s_02",]                  #when looking for my replicates all I need to do is enter the sample name here and run to line 74.
 output <- find_relatives(row1)
 output
-#Now I want the output of find_relatives to be converted into sample names, fount in names_list.
+
+#Now I convert the output of find_relatives (index -> sample name).
 index_to_samples <- function(find_relatives_output){
   samples <- list()
   for(i in find_relatives_output){
@@ -79,18 +71,8 @@ index_to_samples <- function(find_relatives_output){
   }
   #return(samples)
 }
-index_to_samples(output)
+index_to_samples(output)    #call the function with the output from "find_relatives"
 
-
-
-#Possibly helpful:
-which.max(row1)
-order(row1)
-decreasing_index <- order(row1, decreasing = FALSE)
-decreasing_index[229]
-which(row1 == min(row1))
-my_list = c(1,2,3)
-my_list[2]
 
 #Making a Tree
 tre <- njs(D)

@@ -57,7 +57,7 @@ find_relatives <-function(row){
   return(relatives)
 }
 #call the function with one row of the matrix (one individual).
-row1 <- M["p_002.5s_02",]                  #when looking for my replicates all I need to do is enter the sample name here and run to line 74.
+row1 <- M["p_023s_13",]                  #when looking for my replicates all I need to do is enter the sample name here and run to line 74.
 output <- find_relatives(row1)
 output
 
@@ -73,6 +73,17 @@ index_to_samples <- function(find_relatives_output){
 }
 index_to_samples(output)    #call the function with the output from "find_relatives"
 
+#Now let's see if we can get the relatives from the entire list of replciate samples.
+reps <- read.csv("list_of_replicates_first_library.csv", header = FALSE, sep = ",")
+as(reps, Class ="list") <- replicates #not sure why this is a list with one value 16 items deep rather than just being 16 items
+replicates[1]
+
+reps.list <- as.list(as.data.frame(t(reps)))
+reps.list[3]
+
+for(i in reps.list){
+  print(i)
+}
 
 #Making a Tree
 tre <- njs(D)

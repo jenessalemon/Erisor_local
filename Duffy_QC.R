@@ -37,13 +37,14 @@ M <- as(D, "matrix")               #Makes a normal matrix of the distance values
 M                                  
 str(M)
 
-#Indexing Distance Matrix (D)
+#Indexing Distance Matrix (M)
 #All of the distance values for each individual are in each row, and each column, due to nature of the matrix.
 row1 <- M["p_001s_01",]
 row1                                #row 1 has the distance values between p_001s_01 and every other sample in this library.
 str(row1)
 row1["p_001s_03"]                   #index by sample name
 row1[3]                             #by index number
+
 
 #Now we identify the 5 closest relatives to a replicate sample:
 
@@ -75,9 +76,6 @@ index_to_samples(output)    #call the function with the output from "find_relati
 
 #Now let's see if we can get the relatives from the entire list of replciate samples.
 reps <- read.csv("list_of_replicates_first_library.csv", header = FALSE, sep = ",")
-as(reps, Class ="list") <- replicates #not sure why this is a list with one value 16 items deep rather than just being 16 items
-replicates[1]
-
 reps.list <- as.list(as.data.frame(t(reps)))
 reps.list[3]
 
@@ -85,6 +83,49 @@ for(i in reps.list){
   print(i)
 }
 
+#psuedocode
+#for i in list of replicates
+#row_"i" <- M[i,]
+#make a new matrix of just the replciate rows and call it on the whole matrix?
+
+heyheyhey <- c("p_001_02", "p_019s_13")
+heyheyhey
+"p_019s_13" %in% heyheyhey
+#works
+
+for(row in M){
+  if(row == index){
+    R[i] <- M[i]
+  }
+reps.list
+
+#So that I don't have to do this individually with 38 replicates
+#2 ideas:
+  #1 is to create a matrix that only retains line of replicate individuals, and apply to that entire matrix.
+  #2 is a nasty nested for loop. I'll attempt #1 first.
+
+replicate_matrix <- function(reps_list, matrix){       #create a matrix with only rows representing replicate samples
+  R <- matrix(nrow = length(reps_list), ncol = 229)    #Initialize an empty matrix
+  for(row in row.names(matrix)){                       #M is the entire distance matrix
+    if(row %in% reps_list == TRUE){                    #If the sample name is in the list of replciates
+      R[row] <- M[row]                                 #add that row to our new matrix
+    }
+  }
+  return(R)
+}
+R <- replicate_matrix(reps.list, M)
+str(R)
+  
+find_my_replicates <- function(rep_matrix){              #take the output from replciate_matrix (line 107)
+  for(row in rep_matrix){
+    print(row)
+    index <- find_relatives()
+    index_to_samples(indices)
+  }
+}
+
+indices <- find_relatives(reps.list)
+index_to_samples(indices)
 #Making a Tree
 tre <- njs(D)
 jpeg(height=960, width=960)

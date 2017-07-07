@@ -8,7 +8,7 @@ library("ggplot2")
 library("adegenet")
 
 #Read in data
-obj1 <- read.structure("eri_sor_9sout.str", n.ind = 244, n.loc = 1886, col.lab = 1, col.pop = 0, col.others = NULL, row.marknames = 0) #place cursor in console
+obj1 <- read.structure("erisor_reps_9sout.str", n.ind = 262, n.loc = 1886, col.lab = 1, col.pop = 0, col.others = NULL, row.marknames = 0) #place cursor in console
 # It will prompt for info:
 #   genotypes = 244  (number of samples) This number can be found in the ipyrad _stats file, I had 266 but I threw out two samples with no data. 
 #   markers = 1886 (number of loci) Also find in ipyrad _stats file.
@@ -17,7 +17,7 @@ obj1 <- read.structure("eri_sor_9sout.str", n.ind = 244, n.loc = 1886, col.lab =
 #   other optional columns - just hit enter, there are none in our data
 #   row with the marker names = 0 (We don't have a marker names row)
 #   genotypes coded by a single row = n (We have 2 lines per sample in the dataset.)
-indNames(obj1) # should return a list of the 244 sample names, I only get 229 because low coverage individuals get filtered out.
+indNames(obj1) # I only get 238 because (24) low coverage individuals get filtered out.
 ploidy(obj1) # should return 2 since we gave it 2 alleles for each marker.
 
 
@@ -63,6 +63,8 @@ output <- find_relatives(row1)
 output
 
 #Now I convert the output of find_relatives (index -> sample name).
+names_list <- indNames(obj1)
+names_list
 index_to_samples <- function(find_relatives_output){
   samples <- list()
   for(i in find_relatives_output){
@@ -83,29 +85,17 @@ for(i in reps.list){
   print(i)
 }
 
-#psuedocode
-#for i in list of replicates
-#row_"i" <- M[i,]
-#make a new matrix of just the replciate rows and call it on the whole matrix?
-
-heyheyhey <- c("p_001_02", "p_019s_13")
-heyheyhey
-"p_019s_13" %in% heyheyhey
-#works
-
 for(row in M){
   if(row == index){
     R[i] <- M[i]
   }
 reps.list
 
-#So that I don't have to do this individually with 38 replicates
-#2 ideas:
-  #1 is to create a matrix that only retains line of replicate individuals, and apply to that entire matrix.
-  #2 is a nasty nested for loop. I'll attempt #1 first.
+#So that I don't have to do this individually with 38 replicates:
+#Create a matrix that only retains line of replicate individuals, and apply to that entire matrix.
 
 replicate_matrix <- function(reps_list, matrix){       #create a matrix with only rows representing replicate samples
-  R <- matrix(nrow = length(reps_list), ncol = 229)    #Initialize an empty matrix
+  R <- matrix(nrow = length(reps_list), ncol = 238)    #Initialize an empty matrix
   for(row in row.names(matrix)){                       #M is the entire distance matrix
     if(row %in% reps_list == TRUE){                    #If the sample name is in the list of replciates
       R[row] <- M[row]                                 #add that row to our new matrix
@@ -116,7 +106,7 @@ replicate_matrix <- function(reps_list, matrix){       #create a matrix with onl
 R <- replicate_matrix(reps.list, M)
 str(R)
   
-find_my_replicates <- function(rep_matrix){              #take the output from replciate_matrix (line 107)
+find_my_replicates <- function(rep_matrix){              #take the output from replciate_matrix (line 97)
   for(row in rep_matrix){
     print(row)
     index <- find_relatives()
@@ -126,6 +116,7 @@ find_my_replicates <- function(rep_matrix){              #take the output from r
 
 indices <- find_relatives(reps.list)
 index_to_samples(indices)
+
 #Making a Tree
 tre <- njs(D)
 jpeg(height=960, width=960)

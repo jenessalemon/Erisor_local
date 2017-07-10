@@ -5,3 +5,7 @@ loci_in_assembly <- stats[,9]
 
 reads_and_loci <- subset(stats, select = c("reads_raw", "loci_in_assembly"))
 summary(reads_and_loci)
+plot(reads_and_loci)
+
+fit <- lm(loci_in_assembly ~ reads_raw, data=stats)
+summary(fit)

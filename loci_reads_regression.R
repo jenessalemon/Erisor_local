@@ -9,3 +9,4 @@ plot(reads_and_loci)
 
 fit <- lm(loci_in_assembly ~ reads_raw, data=stats)
 summary(fit)
+plot(fit)
